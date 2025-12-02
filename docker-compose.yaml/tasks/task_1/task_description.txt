@@ -1,0 +1,41 @@
+
+# Goal
+
+Enable users to add and manage subtasks within a task.
+
+# Requirements
+
+## Data Model
+
+* Add `SubTask`: `{ id: string, text: string, isCompleted: boolean }`.
+* Update `Task` to include `subtasks: SubTask[]`.
+
+## Backend
+
+* Set `subtasks` to an empty array in `taskService.create`.
+* Add `taskService.toggleSubtask(taskId, subTaskId)` to toggle completion.
+* Update `TaskController` to expose this method.
+
+## Frontend API
+
+* Add `toggleSubtask` to `apiService.ts`.
+
+## UI (TaskItem.tsx)
+
+* Show progress like “2/4 subtasks”.
+* Render subtasks under the task.
+* Clicking a subtask toggles it immediately.
+
+# Acceptance Criteria
+
+* New tasks start with an empty subtask list.
+* Old tasks load safely with or without subtasks.
+* Subtask clicks update their status and the progress bar.
+
+
+author_name: Ronan
+author_email: adamvickh@gmail.com
+difficulty: medium
+category: Feature
+tags: react, typescript, forms, validation
+parser_name: node
