@@ -57,7 +57,6 @@ class TaskService {
       isCompleted: false,
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      subtasks: [],
     };
 
     tasks.push(newTask);
@@ -119,37 +118,6 @@ class TaskService {
     }
     
     return countRemoved;
-  }
-
-  toggleSubtask(taskId: string, subtaskId: string): Task | null {
-    const tasks = db.readTasks();
-    const taskIndex = tasks.findIndex(t => t.id === taskId);
-    
-    if (taskIndex === -1) return null;
-
-    const task = tasks[taskIndex];
-    if (!task.subtasks) task.subtasks = [];
-
-    const subtaskIndex = task.subtasks.findIndex(s => s.id === subtaskId);
-    if (subtaskIndex === -1) return null;
-
-    const updatedSubtasks = [...task.subtasks];
-    updatedSubtasks[subtaskIndex] = {
-      ...updatedSubtasks[subtaskIndex],
-      isCompleted: !updatedSubtasks[subtaskIndex].isCompleted
-    };
-
-    const updatedTask: Task = {
-      ...task,
-      subtasks: updatedSubtasks,
-      updatedAt: Date.now()
-    };
-
-    tasks[taskIndex] = updatedTask;
-    db.writeTasks(tasks);
-    Logger.info('Subtask toggled', { taskId, subtaskId });
-    
-    return updatedTask;
   }
 
   getStats(): TaskStats {
