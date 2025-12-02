@@ -24,15 +24,6 @@ export enum SortOption {
 }
 
 /**
- * SubTask object
- */
-export interface SubTask {
-  id: string;
-  text: string;
-  isCompleted: boolean;
-}
-
-/**
  * The core Task object.
  */
 export interface Task {
@@ -44,7 +35,6 @@ export interface Task {
   createdAt: number;
   updatedAt: number;
   completedAt?: number;
-  subtasks: SubTask[];
 }
 
 /**
@@ -72,7 +62,7 @@ export interface ApiResponse<T> {
   };
 }
 
-/**~
+/**
  * Input DTO for creating a task.
  */
 export interface CreateTaskDTO {
